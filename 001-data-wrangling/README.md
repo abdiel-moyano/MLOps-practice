@@ -16,26 +16,30 @@ Real-world sensors often fail, leading to missing values (`NaN`). This module im
 We implemented a logic-gate to transform raw temperature readings into a binary feature (`Is_Overheating`). This simplifies the decision boundary for the ML model, improving predictive performance.
 
 ## 🛠 Technical Stack
-* **Pandas:** Used for structured data manipulation and DataFrame management.
-* **NumPy:** Used for high-performance numerical operations and the final "NumPy Bridge" (converting DataFrames to Matrices).
+* **Python 3.12**
+* **Pandas:** Structured data manipulation and DataFrame management.
+* **NumPy:** High-performance numerical operations and "NumPy Bridge" implementation.
 
-## 🚀 How to Run
-Ensure you have the requirements installed:
-```bash
-pip install pandas numpy
-```
-
-Run the pre-processing script:
+## 🚀 Environment Setup & Execution
+To ensure reproducibility, follow these steps using a Virtual Environment:
 
 ```bash
+# 1. Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the pre-processing pipeline
 python pre_processing.py
 ```
 
 ## 📊 Expected Output
-The script produces a processed NumPy ndarray (2D Matrix) representing the feature set:
+The script generates a NumPy ndarray (2D Matrix). This matrix is the final input for the model's .predict() method, following the structure:
 
-Column 0: Temperature (Imputed)
-
-Column 1: CPU Usage
-
-Column 2: Is_Overheating (Calculated)
+| Index | Feature Name | Description |
+|-------|--------------|-------------|
+| 0 | Temperature | Imputed value (Mean) |
+| 1 | CPU_Usage | Raw telemetry value |
+| 2 | Is_Overheating | Binary flag (0/1) |
